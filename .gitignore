@@ -38,6 +38,8 @@ frontend/build/
 frontend/dist/
 frontend/.env.local
 
+venv/
+
 # OS generated files
 .DS_Store
 Thumbs.db
