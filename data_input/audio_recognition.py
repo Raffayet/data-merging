@@ -101,7 +101,6 @@ if __name__ == "__main__":
             print("Extracted first name:", first_name)
         else:
             print("No first name found in the text.")
-
         if last_name:
             print("Extracted last name:", last_name)
         else:
