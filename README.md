@@ -1,16 +1,18 @@
 # data-merging
-Small Full-Stack app which aims to deliver data merging tool
+Go app which aims to deliver data merging tool
 
 Tech stack:
 - Go
-- React (Typescript)
+- Python (scripts)
 - MongoDB
 
 Run commands:
 - Go server:
   - cd data-merging\backend\cmd\app
   - go run main.go
+Python commands:
+  - cd data_input
+  - python audio_recognition.py
+  - python photo_recognition.py
+ 
     
-- React frontend:
-  - cd data-merging\frontend
-  - npm start
