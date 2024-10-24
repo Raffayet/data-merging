@@ -5,9 +5,9 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func SetupRouter(profileHandler *api.ProfileHandler) *mux.Router {
+func SetupRouter(profileHandler *api.DatasetHandler) *mux.Router {
 	// Setup HTTP routing
 	router := mux.NewRouter()
-	router.HandleFunc("/profiles", profileHandler.GetProfilesHandler).Methods("GET")
+	router.HandleFunc("/datasets", profileHandler.GetDatasetHandler).Methods("GET")
 	return router
 }

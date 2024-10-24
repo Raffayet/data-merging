@@ -1,5 +1,7 @@
 package seeder
 
+// This seeder is going to generate profile data
+
 import (
 	"context"
 	"log"
@@ -50,6 +52,8 @@ func createSeedProfiles() []domain.Profile {
 		lastName := lastNamesPool[rand.Intn(len(lastNamesPool))]
 		phoneNumber := "061220113" + strconv.Itoa(i)
 
+		// Creating profile only for example
+		// Dataset can be any entity
 		p := domain.Profile{
 			FirstName:   firstName,
 			LastName:    lastName,
@@ -63,19 +67,24 @@ func createSeedProfiles() []domain.Profile {
 	return profiles
 }
 
-// GenerateProfiles creates and saves demo profiles to MongoDB
-func GenerateProfiles(repo *repository.MongoProfileRepository) {
+// GenerateSeedDatasets creates and saves demo profiles to MongoDB
+func GenerateSeedDatasets(repo *repository.MongoDatasetRepository) {
 	profiles := createSeedProfiles()
 
-	// Use repository to interact with MongoDB
-	collection := repo.Client().Database("data_merging").Collection("profiles")
+	ds := domain.Dataset{
+		Base: domain.Base{
+			InsertDate: time.Now(),
+			UpdateDate: time.Now(),
+		},
+		Content: profiles,
+	}
+
+	collection := repo.Client().Database("data_merging").Collection("datasets")
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 
-	for _, profile := range profiles {
-		_, err := collection.InsertOne(ctx, profile)
-		if err != nil {
-			log.Println("Error inserting demo profile:", err)
-		}
+	_, err := collection.InsertOne(ctx, ds)
+	if err != nil {
+		log.Println("Error inserting demo dataset:", err)
 	}
 }

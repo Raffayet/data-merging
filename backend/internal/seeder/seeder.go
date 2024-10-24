@@ -8,14 +8,15 @@ import (
 	"github.com/Raffayet/data-merging/backend/internal/repository"
 )
 
-func GenerateDemoData(profileRepo *repository.MongoProfileRepository) {
+func GenerateDemoData(datasetRepo *repository.MongoDatasetRepository, organizationRepo *repository.MongoOrganizationRepository) {
 	// Create demo data
-	CleanDemoData(profileRepo)
-	GenerateProfiles(profileRepo)
+	CleanDemoData(datasetRepo)
+	GenerateOrganizations(organizationRepo)
+	GenerateSeedDatasets(datasetRepo)
 }
 
 // CleanDemoData removes the demo profiles from MongoDB
-func CleanDemoData(repo *repository.MongoProfileRepository) {
+func CleanDemoData(repo *repository.MongoDatasetRepository) {
 	// Use the MongoDB client to drop the entire database
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

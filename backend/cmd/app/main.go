@@ -29,12 +29,14 @@ func main() {
 	defer client.Disconnect(context.Background())
 
 	// Create repository, service, and handler
-	profileRepo := repository.NewMongoProfileRepository(client)
-	profileService := service.NewProfileService(profileRepo)
-	profileHandler := api.NewProfileHandler(profileService)
+	datasetRepo := repository.NewDatasetRepository(client)
+	datasetService := service.NewDatasetService(datasetRepo)
+	datasetHandler := api.NewDatasetHandler(datasetService)
 
-	router := config.SetupRouter(profileHandler)
-	seeder.GenerateDemoData(profileRepo)
+	organizationRepo := repository.NewOrganizationRepository(client)
+
+	router := config.SetupRouter(datasetHandler)
+	seeder.GenerateDemoData(datasetRepo, organizationRepo)
 
 	startServer(router)
 }
